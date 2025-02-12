@@ -23,7 +23,36 @@ class EmployeeResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Section::make('User Name')
+                    ->description('Put the user name details in.')
+                    ->schema([
+                        Forms\Components\TextInput::make('first_name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('last_name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('middle_name')
+                            ->required()
+                            ->maxLength(255),
+                    ])->columns(3),
+                Forms\Components\Section::make('User address')
+                    ->schema([
+                        Forms\Components\TextInput::make('address')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('zip_code')
+                            ->required()
+                            ->maxLength(255),
+                    ])->columns(2),
+                Forms\Components\Section::make('Dates')
+                    ->schema([
+                        Forms\Components\DatePicker::make('date_of_birth')
+                            ->required(),
+                        Forms\Components\DatePicker::make('date_hired')
+                            ->required(),
+                    ])->columns(2)
+
             ]);
     }
 
@@ -31,7 +60,30 @@ class EmployeeResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('first_name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('last_name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('middle_name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('address')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('zip_code')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('date_of_birth')
+                    ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('date_hired')
+                    ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -44,6 +96,9 @@ class EmployeeResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ])
+            ->emptyStateActions([
+                Tables\Actions\CreateAction::make(),
             ]);
     }
 
