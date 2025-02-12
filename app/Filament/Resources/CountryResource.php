@@ -25,6 +25,8 @@ class CountryResource extends Resource
 
     protected static ?string $navigationGroup = 'System Management';
 
+    protected static ?int $navigationSort = 1;
+
     // protected static ?string $slug = 'employees-country';
 
     public static function form(Form $form): Form
