@@ -32,18 +32,21 @@ class CountryResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-        ->schema([
-            Forms\Components\TextInput::make('name')
-                ->required()
-                ->maxLength(255),
-            Forms\Components\TextInput::make('code')
-                ->required()
-                ->maxLength(3),
-            Forms\Components\TextInput::make('phonecode')
-                ->required()
-                ->numeric()
-                ->maxLength(5),
-        ]);
+            ->schema([
+                Forms\Components\Section::make('Country Details')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('code')
+                            ->required()
+                            ->maxLength(3),
+                        Forms\Components\TextInput::make('phonecode')
+                            ->required()
+                            ->numeric()
+                            ->maxLength(5),
+                    ])
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -62,6 +65,9 @@ class CountryResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ])
+            ->emptyStateActions([
+                Tables\Actions\CreateAction::make(),
             ]);
     }
 
