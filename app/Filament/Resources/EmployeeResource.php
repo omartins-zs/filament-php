@@ -44,16 +44,16 @@ class EmployeeResource extends Resource
                             })
                             ->required(),
                         Forms\Components\Select::make('state_id')
-                            ->options(fn (Get $get): Collection => State::query()
+                            ->options(fn(Get $get): Collection => State::query()
                                 ->where('country_id', $get('country_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
                             ->preload()
                             ->live()
-                            ->afterStateUpdated(fn (Set $set) => $set('city_id', null))
+                            ->afterStateUpdated(fn(Set $set) => $set('city_id', null))
                             ->required(),
                         Forms\Components\Select::make('city_id')
-                            ->options(fn (Get $get): Collection => City::query()
+                            ->options(fn(Get $get): Collection => City::query()
                                 ->where('state_id', $get('state_id'))
                                 ->pluck('name', 'id'))
                             ->searchable()
@@ -90,11 +90,14 @@ class EmployeeResource extends Resource
                 Forms\Components\Section::make('Dates')
                     ->schema([
                         Forms\Components\DatePicker::make('date_of_birth')
+                            ->native(false)
+                            ->displayFormat('d/m/Y')
                             ->required(),
                         Forms\Components\DatePicker::make('date_hired')
+                            ->native(false)
+                            ->displayFormat('d/m/Y')
                             ->required(),
                     ])->columns(2)
-
             ]);
     }
 
