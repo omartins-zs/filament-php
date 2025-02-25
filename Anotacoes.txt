@@ -1,0 +1,20 @@
+
+
+composer require filament/filament:^3.2 -W
+
+php artisan filament:install --panels
+
+php artisan make:filament-user
+
+php artisan make:filament-resource
+
+php artisan make:filament-resource State --generate
+
+php artisan make:filament-resource State --generate --view
+
+
+Blade Icons
+https://blade-ui-kit.com/blade-icons
+
+
+https://heroicons.com/
