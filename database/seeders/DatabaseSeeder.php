@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Department;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -21,9 +22,12 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123456'),
         ]);
 
+
         $this->call(CountrySeeder::class);
         $this->call(StateSeeder::class);
         $this->call(CitySeeder::class);
+
+        Department::create(['name' => 'Laravel']);
 
         User::factory()->create([
             'name' => 'Test User',
