@@ -16,22 +16,25 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+
         User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
             'password' => Hash::make('123456'),
         ]);
 
-
-        $this->call(CountrySeeder::class);
-        $this->call(StateSeeder::class);
-        $this->call(CitySeeder::class);
-
-        Department::create(['name' => 'Laravel']);
-
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'password' => Hash::make('123456'),
         ]);
+
+        $this->call(CountrySeeder::class);
+
+        $this->call(StateSeeder::class);
+
+        $this->call(CitySeeder::class);
+
+        Department::create(['name' => 'Laravel']);
     }
 }
